@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Bulls_And_Cows.Views.MainPage"
+             BackgroundColor="#F6F4FF">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24,30" Spacing="16">
+
+            <!-- Title and small "By Bar" label -->
+            <VerticalStackLayout Spacing="2">
+                <Label Text="Bulls and Cows"
+                       FontSize="34"
+                       FontAttributes="Bold"
+                       TextColor="#7C5CFC"
+                       HorizontalOptions="Center" />
+                <Label Text="By Bar"
+                       FontSize="12"
+                       TextColor="#8A85A8"
+                       HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <!-- Status message -->
+            <Label Text="{Binding StatusMessage}"
+                   FontSize="17"
+                   TextColor="#2E2559"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center" />
+
+            <!-- Number of guesses card -->
+            <Border BackgroundColor="White"
+                    Stroke="#E4DEFA"
+                    StrokeThickness="1"
+                    Padding="20,14">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20" />
+                </Border.StrokeShape>
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Grid.Column="0"
+                           Text="Guesses made"
+                           FontSize="17"
+                           TextColor="#8A85A8"
+                           VerticalOptions="Center" />
+                    <Label Grid.Column="1"
+                           Text="{Binding GuessCount}"
+                           FontSize="26"
+                           FontAttributes="Bold"
+                           TextColor="#7C5CFC"
+                           VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <!-- Your guess card -->
+            <Border BackgroundColor="White"
+                    Stroke="#E4DEFA"
+                    StrokeThickness="1"
+                    Padding="20,14">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20" />
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="2">
+                    <Label Text="YOUR GUESS"
+                           FontSize="12"
+                           TextColor="#8A85A8" />
+                    <Entry Text="{Binding CurrentGuess}"
+                           IsEnabled="{Binding IsGameActive}"
+                           Placeholder="1234"
+                           PlaceholderColor="#CFC6F5"
+                           TextColor="#2E2559"
+                           Keyboard="Numeric"
+                           FontSize="32"
+                           HorizontalTextAlignment="Center"
+                           HeightRequest="56" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Error box: soft rose, only visible when there is an error -->
+            <Border IsVisible="{Binding HasError}"
+                    BackgroundColor="#FDE8EC"
+                    Stroke="Transparent"
+                    Padding="16,12">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="16" />
+                </Border.StrokeShape>
+                <Label Text="{Binding ErrorMessage}"
+                       TextColor="#B3263E"
+                       FontSize="15" />
+            </Border>
+
+            <!-- Submit: the main action -->
+            <Button Text="SUBMIT GUESS"
+                    Command="{Binding SubmitGuessCommand}"
+                    IsEnabled="{Binding IsGameActive}"
+                    BackgroundColor="#7C5CFC"
+                    TextColor="White"
+                    FontSize="17"
+                    FontAttributes="Bold"
+                    CornerRadius="20"
+                    HeightRequest="58" />
+
+            <!-- New Game and Quit side by side -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Button Grid.Column="0"
+                        Text="New Game"
+                        Command="{Binding NewGameCommand}"
+                        BackgroundColor="White"
+                        BorderColor="#CFC6F5"
+                        BorderWidth="2"
+                        TextColor="#2E2559"
+                        FontSize="16"
+                        CornerRadius="20"
+                        HeightRequest="54" />
+                <Button Grid.Column="1"
+                        Text="Quit"
+                        Command="{Binding QuitCommand}"
+                        BackgroundColor="White"
+                        BorderColor="#CFC6F5"
+                        BorderWidth="2"
+                        TextColor="#2E2559"
+                        FontSize="16"
+                        CornerRadius="20"
+                        HeightRequest="54" />
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
